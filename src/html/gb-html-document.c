@@ -20,11 +20,11 @@
 
 #include <glib/gi18n.h>
 #include <gtksourceview/gtksourcefile.h>
+#include <cmark.h>
 
 #include "gb-editor-document.h"
 #include "gb-html-document.h"
 #include "gb-html-view.h"
-#include "gs-markdown.h"
 
 struct _GbHtmlDocumentPrivate
 {
@@ -323,17 +323,15 @@ gchar *
 gb_html_markdown_transform (GbHtmlDocument *document,
                             const gchar    *content)
 {
-  GsMarkdown *md;
   gchar *str;
+  cmark_node *cnode;
 
   g_return_val_if_fail (GB_IS_HTML_DOCUMENT (document), NULL);
   g_return_val_if_fail (content, NULL);
 
-  md = gs_markdown_new (GS_MARKDOWN_OUTPUT_HTML);
-  gs_markdown_set_autolinkify (md, TRUE);
-  gs_markdown_set_escape (md, TRUE);
+  cnode = cmark_parse_document(content, g_utf8_strlen(content, -1));
 
-  str = gs_markdown_parse (md, content);
+  str = cmark_render_html(cnode);
 
   if (str)
     {
@@ -358,7 +356,7 @@ gb_html_markdown_transform (GbHtmlDocument *document,
       str = tmp;
     }
 
-  g_clear_object (&md);
+  cmark_node_free(cnode);
 
   return str;
 }

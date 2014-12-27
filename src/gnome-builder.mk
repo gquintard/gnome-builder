@@ -127,8 +127,6 @@ libgnome_builder_la_SOURCES = \
 	src/keybindings/gb-keybindings.h \
 	src/log/gb-log.c \
 	src/log/gb-log.h \
-	src/markdown/gs-markdown.c \
-	src/markdown/gs-markdown.h \
 	src/nautilus/nautilus-floating-bar.c \
 	src/nautilus/nautilus-floating-bar.h \
 	src/navigation/gb-navigation-item.c \

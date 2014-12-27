@@ -1,5 +1,6 @@
 PKG_CHECK_MODULES(BUILDER, [gtk+-3.0 >= 3.15.3
                             gtksourceview-3.0 >= 3.15.3
                             libdevhelp-3.0 >= 3.14.0
-                            libgit2-glib-1.0 >= 0.0.24])
+                            libgit2-glib-1.0 >= 0.0.24
+                            libcmark])
 
